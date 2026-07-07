@@ -2,10 +2,12 @@
 
 Minimal Express backend for the project.
 
+Repository: https://github.com/Veer376/pivot-backend.git
+
 ## Clone
 
 ```bash
-git clone <your-backend-repo-url>
+git clone https://github.com/Veer376/pivot-backend.git
 cd backend
 ```
 
