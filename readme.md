@@ -17,16 +17,21 @@ cd backend
 npm install
 ```
 
+## Add api keys
+Rename .env.example to .env and your own api keys.
+
 ## Run
 
 ```bash
 node --watch server.js
 ```
 
-## Health Check
-
-The server exposes a simple health endpoint at `/` that responds with:
-
-```json
-{ "status": "ok" }
-```
+## Test /chat endpoint on postman.
+req.body = {
+    "messages": [
+        {
+            "role": "user",
+            "content": "Hello" 
+        }
+    ]
+}
