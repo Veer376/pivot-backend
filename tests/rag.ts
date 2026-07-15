@@ -1,5 +1,6 @@
 import { loadWebPage } from "../services/documentLoader.ts";
 import { splitDocuments } from "../services/documentSplitter.ts";
+import { generateEmbedding } from "../services/embedding.ts";
 
 async function testRAG() {
 
@@ -12,13 +13,16 @@ async function testRAG() {
 
     console.log("Documents split", splits.length);
 
-    const truncatedSplits = splits.slice(0, 20);
+    const truncatedSplits = splits.slice(0, 1);
 
     console.log("Truncated splits", truncatedSplits.length);
 
     // Generate embeddings for the documents.
-    
 
+    const embeddings = await generateEmbedding(truncatedSplits);
+
+    console.log("Embeddings generated", embeddings.length);
+    console.log("First embedding", embeddings[0].values);
 
 
 }
