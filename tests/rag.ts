@@ -17,8 +17,8 @@ async function testRAG() {
     console.log("Truncated splits", truncatedSplits.length);
 
     // Generate embeddings for the documents.
-
     
+
 
 
 }
