@@ -1,6 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
 import { Document } from "@langchain/core/documents";
+import dotenv from "dotenv";
 
+dotenv.config();
 const ai = new GoogleGenAI({});
 
 async function main() {
