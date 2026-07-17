@@ -1,5 +1,5 @@
 import express from 'express';
-import getGroqResponse from './services/groq.js';
+import getGroqResponse, { getGroqStreamResponse } from './services/groq.js';
 import cors from 'cors';
 
 const app = express();
@@ -28,6 +28,31 @@ app.post('/chat', async (req, res) => {
     } catch (error) {
         console.log("Error in /chat route:", error);
         res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/chat-stream', async (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    try {
+        const { messages, model } = req.body;
+
+        if (!messages || !Array.isArray(messages) || messages.length === 0) {
+            return res.status(400).json({ error: 'Invalid messages format. It should be a non-empty array.' });
+        }
+
+        const send = (data) => {
+            res.write(`data: ${JSON.stringify(data)}\n\n`);
+        };
+
+        await getGroqStreamResponse(messages, model, send);
+        res.end();
+    } catch (error) {
+        console.log("Error in /chat-stream route:", error);
+        res.write(`data: ${JSON.stringify({ error: 'Internal Server Error' })}\n\n`);
+        res.end();
     }
 });
 
