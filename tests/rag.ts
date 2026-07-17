@@ -15,7 +15,7 @@ async function testRAG() {
 
     console.log("Documents split", splits.length);
 
-    const truncatedSplits = splits.slice(0, 1);
+    const truncatedSplits = splits.slice(0, 15);
 
     console.log("Truncated splits", truncatedSplits.length);
 
